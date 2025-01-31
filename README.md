@@ -102,6 +102,28 @@ This project demonstrates the implementation of a Library Management System usin
 	return_book_isbn VARCHAR(90)
     );
 
+  SHOW tables;
+  
+  ALTER TABLE  Issuedstatus
+  ADD CONSTRAINT fk_members
+  FOREIGN KEY ( issued_member_id)
+  REFERENCES members( member_id);
+
+  ALTER TABLE  Issuedstatus
+  ADD CONSTRAINT fk_books
+  FOREIGN KEY ( issued_book_isbn)
+  REFERENCES books( isbn);
+
+  ALTER TABLE  Employees
+  ADD CONSTRAINT fk_branch
+  FOREIGN KEY (   branch_id )
+  REFERENCES  Branch (branch_id);
+
+  ALTER TABLE  return_status
+  ADD CONSTRAINT fk_issued_status
+  FOREIGN KEY ( issued_id)
+  REFERENCES Issuedstatus(  issued_id);
+
     
 ### 2. CRUD Operations
 - **Create**: Inserted sample records into the `books` table.
