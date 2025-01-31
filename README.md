@@ -129,7 +129,7 @@ This project demonstrates the implementation of a Library Management System usin
   FOREIGN KEY ( issued_id)
   REFERENCES Issuedstatus(  issued_id);
 
-  -## - CRUD Operations --
+  - CRUD Operations --
   
   - **Create**: Inserted sample records into the `books` table.
   - **Read**: Retrieved and displayed data from various tables.
