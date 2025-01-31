@@ -116,10 +116,10 @@ This project demonstrates the implementation of a Library Management System usin
       SHOW tables;
 ## FOREIGN KEY --
 
-      ALTER TABLE  Issuedstatus
-      ADD CONSTRAINT fk_members
-      FOREIGN KEY ( issued_member_id)
-      REFERENCES members( member_id);
+    ALTER TABLE  Issuedstatus
+    ADD CONSTRAINT fk_members
+    FOREIGN KEY ( issued_member_id)
+    REFERENCES members( member_id);
 
     ALTER TABLE  Issuedstatus
     ADD CONSTRAINT fk_books
