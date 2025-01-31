@@ -142,8 +142,8 @@ This project demonstrates the implementation of a Library Management System usin
   INSERT INTO books (isbn,book_title,category,rental_price,status,author,publisher)
   VALUES('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co');
   SELECT * FROM books;
- 
-  -- ** Task 2: Update an Existing Member's Address **
+  --
+  ** Task 2: Update an Existing Member's Address **
 
   UPDATE members
   SET member_address = '125 Oak St'
