@@ -143,22 +143,25 @@ This project demonstrates the implementation of a Library Management System usin
   VALUES('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co');
   SELECT * FROM books;
  
+  **Task 2: Update an Existing Member's Address **
 
   UPDATE members
   SET member_address = '125 Oak St'
   where member_id=  'C103';
   SELECT * FROM members;
 
- 
+  **Task 3: Delete a Record from the Issued Status Table -- Objective: Delete the record with issued_id = 'IS121' from the issued_status table. **
 
   DELETE FROM Issuedstatus
   WHERE issued_id ='IS121';
 
-
+  ** Task 4: Retrieve All Books Issued by a Specific Employee -- Objective: Select all books issued by the employee with emp_id = 'E101'. **
 
   SELECT * FROM Issuedstatus
   WHERE issued_emp_id= 'E101';
 
+
+  ** Task 5: List Members Who Have Issued More Than One Book -- Objective: Use GROUP BY to find members who have issued more than one book. **
 
   SELECT
   issued_emp_id,
@@ -167,7 +170,9 @@ This project demonstrates the implementation of a Library Management System usin
   GROUP BY 1
   HAVING COUNT(*) > 1;
   
-
+  ### 3. CTAS (Create Table As Select)
+  
+  **Task 6: Create Summary Tables**: Used CTAS to generate new tables based on query results - each book and total book_issued_cnt **
 
   CREATE TABLE book_issued_cnt AS
   SELECT 
@@ -182,12 +187,14 @@ This project demonstrates the implementation of a Library Management System usin
  
   SELECT * FROM book_issued_cnt;
 
+  ### 4. Data Analysis & Findings 
 
+  **Task 7. **Retrieve All Books in a Specific Category: **
 
   SELECT * FROM books
   WHERE category = 'Classic';
 
-
+  **Task 8: Find Total Rental Income by Category: **
 
   SELECT * FROM books;
      
@@ -203,6 +210,7 @@ This project demonstrates the implementation of a Library Management System usin
      
   SELECT * FROM books;
 
+  **Task 9. **List Members Who Registered in the Last 180 Days**: **
 
 
   INSERT INTO members (member_id,member_name,member_address,reg_date)
@@ -213,6 +221,7 @@ This project demonstrates the implementation of a Library Management System usin
   SELECT * FROM members
   WHERE reg_date >= CURRENT_DATE-INTERVAl 180 DAY ;
 
+  **Task 10: List Employees with Their Branch Manager's Name and their branch details**: **
 
   SELECT  
   e1.*,
@@ -226,12 +235,13 @@ This project demonstrates the implementation of a Library Management System usin
   employees AS e2
   ON b.manager_id=e2.emp_id;
      
+  **Task 11. Create a Table of Books with Rental Price Above a Certain Threshold: **
  
   CREATE TABLE expensive_books AS 
   SELECT * FROM books
   WHERE rental_price >= 7.00;
-     
- 
+
+  ** Task 12: Retrieve the List of Books Not Yet Returned**
   
   SELECT * FROM Issuedstatus AS ist
   LEFT JOIN
@@ -239,10 +249,8 @@ This project demonstrates the implementation of a Library Management System usin
   ON ist.issued_id = rs.issued_id
   WHERE  rs.return_id is NULL ;
 
+  -- Inserting some additional data --
   
-  
-  
-
   INSERT INTO Issuedstatus (issued_id, issued_member_id, issued_book_name, issued_date, issued_book_isbn, issued_emp_id)
   VALUES
   ('IS151', 'C118', 'The Catcher in the Rye', CURRENT_DATE - INTERVAL 24 DAY, '978-0-553-29698-2', 'E108'),
@@ -251,7 +259,7 @@ This project demonstrates the implementation of a Library Management System usin
   ('IS154', 'C105', 'The Road', CURRENT_DATE - INTERVAL 32 DAY, '978-0-375-50167-0', 'E101');
 
 
-  
+  - ADDING coloum in returnstatus --
   ALTER TABLE return_status
   ADD Column book_quality VARCHAR(15) DEFAULT('Good');
 
@@ -260,9 +268,10 @@ This project demonstrates the implementation of a Library Management System usin
   WHERE issued_id 
   IN ('IS112', 'IS117', 'IS118');
     
-
-
-  
+  -- Advanced SQL Operations --
+  **/* Task 13: Identify Members with Overdue Books
+  Write a query to identify members who have overdue books (assume a 30-day return period). 
+  Display the member's_id, member's name, book title, issue date, and days overdue. */ **
  
   SELECT 
   ist.issued_member_id,
@@ -285,7 +294,10 @@ This project demonstrates the implementation of a Library Management System usin
   ( CURRENT_DATE - ist.issued_date) > 30
   order BY 1;
 
-
+  **/*Task 14: Branch Performance Report
+  Create a query that generates a performance report for each branch,
+  showing the number of books issued, the number of books returned, and the total revenue 
+  generated from book rentals.*/**
 
   CREATE TABLE branch_reports
   AS
@@ -313,6 +325,9 @@ This project demonstrates the implementation of a Library Management System usin
   SELECT * FROM branch_reports;
 
 
+  **/*Task 15: CTAS: Create a Table of Active Members
+  Use the CREATE TABLE AS (CTAS) statement to create a new table active_members 
+  containing members who have issued at least one book in the last 2 months.*/**
 
 
   CREATE TABLE active_members AS
