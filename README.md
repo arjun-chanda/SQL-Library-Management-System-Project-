@@ -221,7 +221,7 @@ This project demonstrates the implementation of a Library Management System usin
   SELECT * FROM members
   WHERE reg_date >= CURRENT_DATE-INTERVAl 180 DAY ;
 
-  **Task 10: List Employees with Their Branch Manager's Name and their branch details**: **
+  -- **Task 10: List Employees with Their Branch Manager's Name and their branch details**: **
 
   SELECT  
   e1.*,
@@ -235,13 +235,13 @@ This project demonstrates the implementation of a Library Management System usin
   employees AS e2
   ON b.manager_id=e2.emp_id;
      
-  **Task 11. Create a Table of Books with Rental Price Above a Certain Threshold: **
+  -- **Task 11. Create a Table of Books with Rental Price Above a Certain Threshold: **
  
   CREATE TABLE expensive_books AS 
   SELECT * FROM books
   WHERE rental_price >= 7.00;
 
-  ** Task 12: Retrieve the List of Books Not Yet Returned**
+  -- ** Task 12: Retrieve the List of Books Not Yet Returned**
   
   SELECT * FROM Issuedstatus AS ist
   LEFT JOIN
@@ -249,7 +249,7 @@ This project demonstrates the implementation of a Library Management System usin
   ON ist.issued_id = rs.issued_id
   WHERE  rs.return_id is NULL ;
 
-  -- Inserting some additional data --
+  -- -- Inserting some additional data --
   
   INSERT INTO Issuedstatus (issued_id, issued_member_id, issued_book_name, issued_date, issued_book_isbn, issued_emp_id)
   VALUES
@@ -259,7 +259,7 @@ This project demonstrates the implementation of a Library Management System usin
   ('IS154', 'C105', 'The Road', CURRENT_DATE - INTERVAL 32 DAY, '978-0-375-50167-0', 'E101');
 
 
-  - ADDING coloum in returnstatus --
+  -- ADDING coloum in returnstatus --
   ALTER TABLE return_status
   ADD Column book_quality VARCHAR(15) DEFAULT('Good');
 
