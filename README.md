@@ -104,40 +104,11 @@ This project demonstrates the implementation of a Library Management System usin
 
     
 ### 2. CRUD Operations
-
 - **Create**: Inserted sample records into the `books` table.
 - **Read**: Retrieved and displayed data from various tables.
 - **Update**: Updated records in the `employees` table.
 - **Delete**: Removed records from the `members` table as needed.
-
-      ALTER TABLE return_status
-      MODIFY COLUMN 	issued_id VARCHAR(30);
-
-      SHOW tables;
-## FOREIGN KEY --
-
-    ALTER TABLE  Issuedstatus
-    ADD CONSTRAINT fk_members
-    FOREIGN KEY ( issued_member_id)
-    REFERENCES members( member_id);
-
-    ALTER TABLE  Issuedstatus
-    ADD CONSTRAINT fk_books
-    FOREIGN KEY ( issued_book_isbn)
-    REFERENCES books( isbn);
-
-    ALTER TABLE  Employees
-    ADD CONSTRAINT fk_branch
-    FOREIGN KEY (   branch_id )
-    REFERENCES  Branch (branch_id);
-
-    ALTER TABLE  return_status
-    ADD CONSTRAINT fk_issued_status
-    FOREIGN KEY ( issued_id)
-    REFERENCES Issuedstatus(  issued_id);
-    
-
-
+  
 -- Task 1. Create a New Book Record -- "978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.')" --
 
     INSERT INTO books (isbn,book_title,category,rental_price,status,author,publisher)
