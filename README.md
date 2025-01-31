@@ -143,25 +143,25 @@ This project demonstrates the implementation of a Library Management System usin
   VALUES('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co');
   SELECT * FROM books;
  
-  ** Task 2: Update an Existing Member's Address **
+  -- ** Task 2: Update an Existing Member's Address **
 
-   UPDATE members
-   SET member_address = '125 Oak St'
-   where member_id=  'C103';
-   SELECT * FROM members;
+  UPDATE members
+  SET member_address = '125 Oak St'
+  where member_id=  'C103';
+  SELECT * FROM members;
 
-  ** Task 3: Delete a Record from the Issued Status Table -- Objective: Delete the record with issued_id = 'IS121' from the issued_status table. **
+  --** Task 3: Delete a Record from the Issued Status Table -- Objective: Delete the record with issued_id = 'IS121' from the issued_status table. **
 
   DELETE FROM Issuedstatus
   WHERE issued_id ='IS121';
 
-  ** Task 4: Retrieve All Books Issued by a Specific Employee -- Objective: Select all books issued by the employee with emp_id = 'E101'. **
+  -- ** Task 4: Retrieve All Books Issued by a Specific Employee -- Objective: Select all books issued by the employee with emp_id = 'E101'. **
 
   SELECT * FROM Issuedstatus
   WHERE issued_emp_id= 'E101';
 
 
-  ** Task 5: List Members Who Have Issued More Than One Book -- Objective: Use GROUP BY to find members who have issued more than one book. **
+  -- ** Task 5: List Members Who Have Issued More Than One Book -- Objective: Use GROUP BY to find members who have issued more than one book. **
   
   SELECT
   issued_emp_id,
@@ -170,9 +170,9 @@ This project demonstrates the implementation of a Library Management System usin
   GROUP BY 1
   HAVING COUNT(*) > 1;
   
-  ### 3. CTAS (Create Table As Select)
+  -- ### 3. CTAS (Create Table As Select)
   
-  **Task 6: Create Summary Tables**: Used CTAS to generate new tables based on query results - each book and total book_issued_cnt **
+  -- **Task 6: Create Summary Tables**: Used CTAS to generate new tables based on query results - each book and total book_issued_cnt **
 
   CREATE TABLE book_issued_cnt AS
   SELECT 
@@ -187,14 +187,14 @@ This project demonstrates the implementation of a Library Management System usin
  
   SELECT * FROM book_issued_cnt;
 
-  ### 4. Data Analysis & Findings 
+  -- ### 4. Data Analysis & Findings 
 
-  **Task 7. **Retrieve All Books in a Specific Category: **
+  -- **Task 7. **Retrieve All Books in a Specific Category: **
 
   SELECT * FROM books
   WHERE category = 'Classic';
 
-  **Task 8: Find Total Rental Income by Category: **
+  -- **Task 8: Find Total Rental Income by Category: **
 
   SELECT * FROM books;
      
@@ -210,7 +210,7 @@ This project demonstrates the implementation of a Library Management System usin
      
   SELECT * FROM books;
 
-  **Task 9. **List Members Who Registered in the Last 180 Days**: **
+  -- **Task 9. **List Members Who Registered in the Last 180 Days**: **
 
 
   INSERT INTO members (member_id,member_name,member_address,reg_date)
