@@ -158,176 +158,162 @@ This project demonstrates the implementation of a Library Management System usin
   GROUP BY 1
   HAVING COUNT(*) > 1;
   
-### 3. CTAS (Create Table As Select)
 
--- Task 6: Create Summary Tables**: Used CTAS to generate new tables based on query results - each book and total book_issued_cnt --
 
-    CREATE TABLE book_issued_cnt AS
-    SELECT 
-    b.isbn,
-    b.book_title,
-    COUNT(ist.issued_id) as is_num
-    FROM books AS b
-    JOIN 
-    Issuedstatus AS ist 
-    ON ist.issued_book_isbn = b.isbn
-    GROUP BY 1,2;
+  CREATE TABLE book_issued_cnt AS
+  SELECT 
+  b.isbn,
+  b.book_title,
+  COUNT(ist.issued_id) as is_num
+  FROM books AS b
+  JOIN 
+  Issuedstatus AS ist 
+  ON ist.issued_book_isbn = b.isbn
+   GROUP BY 1,2;
  
-    SELECT * FROM book_issued_cnt;
+  SELECT * FROM book_issued_cnt;
 
-### 4. Data Analysis & Findings
 
--- Task 7. **Retrieve All Books in a Specific Category: --
 
-    SELECT * FROM books
-    WHERE category = 'Classic';
+  SELECT * FROM books
+  WHERE category = 'Classic';
 
--- Task 8: Find Total Rental Income by Category:
 
-    SELECT * FROM books;
+
+  SELECT * FROM books;
      
-     SELECT 
-     b.category,
-     SUM(b.rental_price),
-     COUNT(*)
-     FROM books AS b
-     JOIN 
-     Issuedstatus AS ist 
-     ON ist.issued_book_isbn = b.isbn
-     GROUP BY 1;
+  SELECT 
+  b.category,
+  SUM(b.rental_price),
+  COUNT(*)
+  FROM books AS b
+  JOIN 
+  Issuedstatus AS ist 
+  ON ist.issued_book_isbn = b.isbn
+  GROUP BY 1;
      
-     SELECT * FROM books;
+  SELECT * FROM books;
 
--- Task 9. **List Members Who Registered in the Last 180 Days**: --
 
-    INSERT INTO members (member_id,member_name,member_address,reg_date)
-    VALUES
-    ('c125','ram','126 Main st','2024-06-01'),
-    ('c130','krish','156 Main st','2024-05-01');
+
+  INSERT INTO members (member_id,member_name,member_address,reg_date)
+  VALUES
+  ('c125','ram','126 Main st','2024-06-01'),
+  ('c130','krish','156 Main st','2024-05-01');
     
-    SELECT * FROM members
-    WHERE reg_date >= CURRENT_DATE-INTERVAl 180 DAY ;
+  SELECT * FROM members
+  WHERE reg_date >= CURRENT_DATE-INTERVAl 180 DAY ;
 
--- Task 10: List Employees with Their Branch Manager's Name and their branch details**: --
 
-    SELECT  
-        e1.*,
-        b.manager_id,
-        e2.emp_name AS manager 
-     FROM employees AS e1
-     JOIN
-     branch AS b
-     ON b.branch_id=e1.branch_id
-     JOIN
-     employees AS e2
-     ON b.manager_id=e2.emp_id;
+  SELECT  
+  e1.*,
+  b.manager_id,
+  e2.emp_name AS manager 
+  FROM employees AS e1
+  JOIN
+  branch AS b
+  ON b.branch_id=e1.branch_id
+  JOIN
+  employees AS e2
+  ON b.manager_id=e2.emp_id;
      
- -- Task 11. Create a Table of Books with Rental Price Above a Certain Threshold: --
-
-     CREATE TABLE expensive_books AS 
-     SELECT * FROM books
-     WHERE rental_price >= 7.00;
+ 
+  CREATE TABLE expensive_books AS 
+  SELECT * FROM books
+  WHERE rental_price >= 7.00;
      
- -- Task 12: Retrieve the List of Books Not Yet Returned --
+ 
   
-      SELECT * FROM Issuedstatus AS ist
-      LEFT JOIN
-      return_status AS rs
-      ON ist.issued_id = rs.issued_id
-      WHERE  rs.return_id is NULL ;
+  SELECT * FROM Issuedstatus AS ist
+  LEFT JOIN
+  return_status AS rs
+  ON ist.issued_id = rs.issued_id
+  WHERE  rs.return_id is NULL ;
 
   
-  ###  Inserting some additional data --
+  
   
 
-    INSERT INTO Issuedstatus (issued_id, issued_member_id, issued_book_name, issued_date, issued_book_isbn, issued_emp_id)
-    VALUES
-    ('IS151', 'C118', 'The Catcher in the Rye', CURRENT_DATE - INTERVAL 24 DAY, '978-0-553-29698-2', 'E108'),
-    ('IS152', 'C119', 'The Catcher in the Rye', CURRENT_DATE - INTERVAL 13 DAY, '978-0-553-29698-2', 'E109'),
-    ('IS153', 'C106', 'Pride and Prejudice', CURRENT_DATE - INTERVAL 7 DAY, '978-0-14-143951-8', 'E107'),
-    ('IS154', 'C105', 'The Road', CURRENT_DATE - INTERVAL 32 DAY, '978-0-375-50167-0', 'E101');
+  INSERT INTO Issuedstatus (issued_id, issued_member_id, issued_book_name, issued_date, issued_book_isbn, issued_emp_id)
+  VALUES
+  ('IS151', 'C118', 'The Catcher in the Rye', CURRENT_DATE - INTERVAL 24 DAY, '978-0-553-29698-2', 'E108'),
+  ('IS152', 'C119', 'The Catcher in the Rye', CURRENT_DATE - INTERVAL 13 DAY, '978-0-553-29698-2', 'E109'),
+  ('IS153', 'C106', 'Pride and Prejudice', CURRENT_DATE - INTERVAL 7 DAY, '978-0-14-143951-8', 'E107'),
+  ('IS154', 'C105', 'The Road', CURRENT_DATE - INTERVAL 32 DAY, '978-0-375-50167-0', 'E101');
 
--- ADDING coloum in returnstatus --
+
   
-    ALTER TABLE return_status
-    ADD Column book_quality VARCHAR(15) DEFAULT('Good');
+  ALTER TABLE return_status
+  ADD Column book_quality VARCHAR(15) DEFAULT('Good');
 
-    UPDATE return_status
-    SET book_quality = 'Damaged'
-    WHERE issued_id 
-        IN ('IS112', 'IS117', 'IS118');
+  UPDATE return_status
+  SET book_quality = 'Damaged'
+  WHERE issued_id 
+  IN ('IS112', 'IS117', 'IS118');
     
 
-###  Advanced SQL Operations --
-/* Task 13: Identify Members with Overdue Books
-Write a query to identify members who have overdue books (assume a 30-day return period). 
-Display the member's_id, member's name, book title, issue date, and days overdue. */ 
+
   
  
-     SELECT 
-     ist.issued_member_id,
-     m.member_name,
-     bk.book_title,
-     ist.issued_date,
-     -- rs.return_date--
-    CURRENT_DATE - ist.issued_date AS over_dues
-     FROM Issuedstatus AS ist
-     JOIN
-      members AS m
-      ON m.member_id = issued_member_id
-      JOIN
-      books AS bk
-      ON bk.isbn = ist.issued_book_isbn
-      LEFT JOIN 
-      return_status AS rs
-      ON rs.issued_id = ist.issued_id
-      WHERE rs.return_date IS NULL
-      AND
-      ( CURRENT_DATE - ist.issued_date) > 30
-      order BY 1;
+  SELECT 
+  ist.issued_member_id,
+  m.member_name,
+  bk.book_title,
+  ist.issued_date,
+  CURRENT_DATE - ist.issued_date AS over_dues
+  FROM Issuedstatus AS ist
+  JOIN
+  members AS m
+  ON m.member_id = issued_member_id
+  JOIN
+  books AS bk
+  ON bk.isbn = ist.issued_book_isbn
+  LEFT JOIN 
+  return_status AS rs
+  ON rs.issued_id = ist.issued_id
+  WHERE rs.return_date IS NULL
+  AND
+  ( CURRENT_DATE - ist.issued_date) > 30
+  order BY 1;
 
-/*Task 14: Branch Performance Report
-Create a query that generates a performance report for each branch,
- showing the number of books issued, the number of books returned, and the total revenue generated from book rentals.*/
 
-    CREATE TABLE branch_reports
-    AS
-    SELECT 
-        b.branch_id,
-        b.manager_id,
-        COUNT(ist.issued_id) as number_book_issued,
-        COUNT(rs.return_id) as number_of_book_return,
-        SUM(bk.rental_price) as total_revenue
-    FROM Issuedstatus as ist
-    JOIN 
-    employees as e
-    ON e.emp_id = ist.issued_emp_id
-    JOIN
-    branch as b
-    ON e.branch_id = b.branch_id
-    LEFT JOIN
-    return_status as rs
-    ON rs.issued_id = ist.issued_id
-    JOIN 
-    books as bk
-    ON ist.issued_book_isbn = bk.isbn
-    GROUP BY 1, 2;
+
+  CREATE TABLE branch_reports
+  AS
+  SELECT 
+  b.branch_id,
+  b.manager_id,
+  COUNT(ist.issued_id) as number_book_issued,
+  COUNT(rs.return_id) as number_of_book_return,
+  SUM(bk.rental_price) as total_revenue
+  FROM Issuedstatus as ist
+  JOIN 
+  employees as e
+  ON e.emp_id = ist.issued_emp_id
+  JOIN
+  branch as b
+  ON e.branch_id = b.branch_id
+  LEFT JOIN
+  return_status as rs
+  ON rs.issued_id = ist.issued_id
+  JOIN 
+  books as bk
+  ON ist.issued_book_isbn = bk.isbn
+  GROUP BY 1, 2;
     
-      SELECT * FROM branch_reports;
+  SELECT * FROM branch_reports;
 
 
-/*Task 15: CTAS: Create a Table of Active Members
-Use the CREATE TABLE AS (CTAS) statement to create a new table active_members 
-containing members who have issued at least one book in the last 2 months.*/
 
-    CREATE TABLE active_members AS
-    SELECT * FROM members
-    WHERE member_id IN (
-        SELECT DISTINCT issued_member_id   
+
+  CREATE TABLE active_members AS
+  SELECT * FROM members
+  WHERE member_id IN (
+  SELECT DISTINCT issued_member_id   
         
-    FROM Issuedstatus
-        WHERE issued_date >= CURRENT_DATE - INTERVAL 2 MONTH
-    );
+  FROM Issuedstatus
+  WHERE issued_date >= CURRENT_DATE - INTERVAL 2 MONTH
+  );
 
     
 ## Reports
