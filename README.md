@@ -105,7 +105,8 @@ This project demonstrates the implementation of a Library Management System usin
   MODIFY COLUMN issued_id VARCHAR(30);
 
   SHOW tables;
- 
+  
+  -- FOREIGN KEY--
 
 
   ALTER TABLE  Issuedstatus
@@ -128,6 +129,14 @@ This project demonstrates the implementation of a Library Management System usin
   FOREIGN KEY ( issued_id)
   REFERENCES Issuedstatus(  issued_id);
 
+  -- CRUD Operations --
+  
+  - **Create**: Inserted sample records into the `books` table.
+  - **Read**: Retrieved and displayed data from various tables.
+  - **Update**: Updated records in the `employees` table.
+  - **Delete**: Removed records from the `members` table as needed.
+
+  ** Task 1. Create a New Book Record -- "978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.')" ** 
 
 
   INSERT INTO books (isbn,book_title,category,rental_price,status,author,publisher)
