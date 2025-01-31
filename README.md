@@ -101,9 +101,13 @@ This project demonstrates the implementation of a Library Management System usin
 	return_date DATE,
 	return_book_isbn VARCHAR(90)
     );
+  ALTER TABLE return_status
+  MODIFY COLUMN issued_id VARCHAR(30);
 
   SHOW tables;
-  
+ 
+
+
   ALTER TABLE  Issuedstatus
   ADD CONSTRAINT fk_members
   FOREIGN KEY ( issued_member_id)
@@ -124,44 +128,36 @@ This project demonstrates the implementation of a Library Management System usin
   FOREIGN KEY ( issued_id)
   REFERENCES Issuedstatus(  issued_id);
 
-    
-### 2. CRUD Operations
-- **Create**: Inserted sample records into the `books` table.
-- **Read**: Retrieved and displayed data from various tables.
-- **Update**: Updated records in the `employees` table.
-- **Delete**: Removed records from the `members` table as needed.
-  
--- Task 1. Create a New Book Record -- "978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.')" --
 
-    INSERT INTO books (isbn,book_title,category,rental_price,status,author,publisher)
-    VALUES('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co');
-    SELECT * FROM books;
+
+  INSERT INTO books (isbn,book_title,category,rental_price,status,author,publisher)
+  VALUES('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co');
+  SELECT * FROM books;
  
--- Task 2: Update an Existing Member's Address --
 
-    UPDATE members
-    SET member_address = '125 Oak St'
-    where member_id=  'C103';
-    SELECT * FROM members;
+  UPDATE members
+  SET member_address = '125 Oak St'
+  where member_id=  'C103';
+  SELECT * FROM members;
 
--- Task 3: Delete a Record from the Issued Status Table -- Objective: Delete the record with issued_id = 'IS121' from the issued_status table. --
+ 
 
-    DELETE FROM Issuedstatus
-    WHERE issued_id ='IS121';
+  DELETE FROM Issuedstatus
+  WHERE issued_id ='IS121';
 
--- Task 4: Retrieve All Books Issued by a Specific Employee -- Objective: Select all books issued by the employee with emp_id = 'E101'. --
 
-    SELECT * FROM Issuedstatus
-    WHERE issued_emp_id= 'E101';
 
--- Task 5: List Members Who Have Issued More Than One Book -- Objective: Use GROUP BY to find members who have issued more than one book. --
+  SELECT * FROM Issuedstatus
+  WHERE issued_emp_id= 'E101';
 
-    SELECT
-    issued_emp_id,
-    COUNT(*)
-    FROM Issuedstatus
-    GROUP BY 1
-    HAVING COUNT(*) > 1;
+
+  SELECT
+  issued_emp_id,
+  COUNT(*)
+  FROM Issuedstatus
+  GROUP BY 1
+  HAVING COUNT(*) > 1;
+  
 ### 3. CTAS (Create Table As Select)
 
 -- Task 6: Create Summary Tables**: Used CTAS to generate new tables based on query results - each book and total book_issued_cnt --
