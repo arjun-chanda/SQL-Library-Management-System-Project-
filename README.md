@@ -145,10 +145,10 @@ This project demonstrates the implementation of a Library Management System usin
  
   ** Task 2: Update an Existing Member's Address **
 
-  UPDATE members
-  SET member_address = '125 Oak St'
-  where member_id=  'C103';
-  SELECT * FROM members;
+   UPDATE members
+   SET member_address = '125 Oak St'
+   where member_id=  'C103';
+   SELECT * FROM members;
 
   ** Task 3: Delete a Record from the Issued Status Table -- Objective: Delete the record with issued_id = 'IS121' from the issued_status table. **
 
