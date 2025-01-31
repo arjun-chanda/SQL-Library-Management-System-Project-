@@ -109,7 +109,7 @@ This project demonstrates the implementation of a Library Management System usin
 - **Read**: Retrieved and displayed data from various tables.
 - **Update**: Updated records in the `employees` table.
 - **Delete**: Removed records from the `members` table as needed.
-    
+
       ALTER TABLE return_status
       MODIFY COLUMN 	issued_id VARCHAR(30);
 
